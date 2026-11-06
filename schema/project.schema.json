@@ -1,0 +1,561 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/short-drama-project.schema.json",
+  "title": "Short Drama Project Package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "project_id",
+    "title",
+    "status",
+    "source",
+    "format",
+    "rights",
+    "story",
+    "characters",
+    "scenes",
+    "props",
+    "crowd_groups",
+    "triggers",
+    "production",
+    "confirmation",
+    "media_manifest"
+  ],
+  "properties": {
+    "schema": {
+      "const": "short-drama-project/v1"
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "format": {
+      "$ref": "#/$defs/format"
+    },
+    "rights": {
+      "$ref": "#/$defs/rights"
+    },
+    "story": {
+      "$ref": "#/$defs/story"
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/character"
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scene"
+      }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/prop"
+      }
+    },
+    "crowd_groups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/crowd"
+      }
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trigger"
+      }
+    },
+    "production": {
+      "$ref": "#/$defs/production"
+    },
+    "confirmation": {
+      "$ref": "#/$defs/confirmation"
+    },
+    "media_manifest": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/media_item"
+      }
+    }
+  },
+  "$defs": {
+    "status": {
+      "type": "string",
+      "enum": ["draft", "partial", "locked", "changed", "archived"]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "confirmed_at"],
+      "properties": {
+        "tool": {
+          "type": "string"
+        },
+        "confirmed_at": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "format": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "platform",
+        "duration_sec",
+        "unit_seconds",
+        "unit_count",
+        "aspect_ratio",
+        "resolution",
+        "fps",
+        "language",
+        "subtitles",
+        "bgm",
+        "audience",
+        "genre"
+      ],
+      "properties": {
+        "platform": { "type": "string" },
+        "duration_sec": { "type": "integer", "minimum": 1 },
+        "unit_seconds": { "type": "integer", "minimum": 1 },
+        "unit_count": { "type": "integer", "minimum": 1 },
+        "aspect_ratio": { "type": "string" },
+        "aspect_ratio_note": { "type": "string" },
+        "resolution": { "type": "string" },
+        "fps": { "type": "integer", "minimum": 1 },
+        "language": { "type": "string" },
+        "subtitles": { "type": "string" },
+        "bgm": { "type": "string" },
+        "audience": { "type": "string" },
+        "genre": { "type": "string" }
+      }
+    },
+    "rights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "source_ip",
+        "work_type",
+        "character_scope",
+        "original_scope",
+        "music",
+        "fonts",
+        "images",
+        "video",
+        "ai_assets",
+        "attribution",
+        "platform_rules"
+      ],
+      "properties": {
+        "status": { "$ref": "#/$defs/license_status" },
+        "source_ip": { "type": "string" },
+        "work_type": { "type": "string" },
+        "character_scope": { "type": "string" },
+        "original_scope": { "type": "string" },
+        "music": { "$ref": "#/$defs/license_item" },
+        "fonts": { "$ref": "#/$defs/license_item" },
+        "images": { "$ref": "#/$defs/license_item" },
+        "video": { "$ref": "#/$defs/license_item" },
+        "ai_assets": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["allowed", "note"],
+          "properties": {
+            "allowed": { "type": "boolean" },
+            "note": { "type": "string" }
+          }
+        },
+        "attribution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "text"],
+          "properties": {
+            "status": { "$ref": "#/$defs/license_status" },
+            "text": { "type": "string" }
+          }
+        },
+        "platform_rules": { "type": "string" }
+      }
+    },
+    "license_status": {
+      "type": "string",
+      "enum": ["pending", "confirmed", "not_required", "risk"]
+    },
+    "license_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "license_status"],
+      "properties": {
+        "mode": { "type": "string" },
+        "license_status": { "$ref": "#/$defs/license_status" },
+        "note": { "type": "string" }
+      }
+    },
+    "story": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "logline",
+        "protagonist_goal",
+        "core_conflict",
+        "reversal",
+        "ending",
+        "world_rules",
+        "timeline",
+        "locations",
+        "event_order",
+        "must_lines",
+        "forbidden_changes"
+      ],
+      "properties": {
+        "logline": { "type": "string" },
+        "protagonist_goal": { "type": "string" },
+        "core_conflict": { "type": "string" },
+        "reversal": { "type": "string" },
+        "ending": { "type": "string" },
+        "world_rules": { "type": "string" },
+        "timeline": { "type": "string" },
+        "locations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "event_order": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "must_lines": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/must_line" }
+        },
+        "forbidden_changes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "must_line": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "speaker_id", "speaker", "delivery", "text", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "speaker_id": { "type": "string" },
+        "speaker": { "type": "string" },
+        "delivery": {
+          "type": "string",
+          "enum": ["on_screen", "off_screen", "voice_over"]
+        },
+        "text": { "type": "string", "minLength": 1 },
+        "status": {
+          "type": "string",
+          "enum": ["locked", "pending", "non_source"]
+        }
+      }
+    },
+    "character": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "display_name",
+        "tier",
+        "relationship",
+        "episodes",
+        "appears_in",
+        "speaks",
+        "visual_lock",
+        "performance_lock",
+        "voice_lock",
+        "continuity",
+        "variants",
+        "references",
+        "rights_status",
+        "lock_status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^DR-[0-9]{2}(_[A-Za-z0-9]+)?$"
+        },
+        "display_name": { "type": "string" },
+        "tier": {
+          "type": "string",
+          "enum": ["core", "key", "function", "voice", "mentioned", "nonhuman", "variant"]
+        },
+        "relationship": { "type": "string" },
+        "episodes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "appears_in": { "type": "string" },
+        "speaks": { "type": "boolean" },
+        "visual_lock": { "$ref": "#/$defs/visual_lock" },
+        "performance_lock": { "type": "string" },
+        "voice_lock": { "$ref": "#/$defs/voice_lock" },
+        "continuity": { "type": "string" },
+        "variants": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "references": { "$ref": "#/$defs/references" },
+        "rights_status": { "$ref": "#/$defs/license_status" },
+        "lock_status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "visual_lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "description", "must_keep", "forbidden_changes"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["complete", "hands_only", "simplified", "not_required", "pending"]
+        },
+        "description": { "type": "string" },
+        "must_keep": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "forbidden_changes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "voice_lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "description", "file", "source", "duration_sec"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["complete", "pending", "not_required"]
+        },
+        "description": { "type": "string" },
+        "file": { "type": "string" },
+        "source": { "type": "string" },
+        "duration_sec": { "type": "number", "minimum": 0 }
+      }
+    },
+    "references": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "items"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["pending", "complete", "not_required"]
+        },
+        "items": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "display_name",
+        "layout",
+        "lighting",
+        "reusable",
+        "style_lock",
+        "reference_status",
+        "lock_status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^SCENE_[0-9]{2}[a-z]?$"
+        },
+        "display_name": { "type": "string" },
+        "layout": { "type": "string" },
+        "lighting": { "type": "string" },
+        "reusable": { "type": "boolean" },
+        "style_lock": { "type": "string" },
+        "reference_status": { "$ref": "#/$defs/reference_status" },
+        "lock_status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "prop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "display_name",
+        "holder",
+        "state_changes",
+        "trigger",
+        "uses_reference",
+        "reference_status",
+        "lock_status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^PROP_[0-9]{2}$"
+        },
+        "display_name": { "type": "string" },
+        "holder": { "type": "string" },
+        "state_changes": { "type": "string" },
+        "trigger": { "type": "string" },
+        "uses_reference": { "type": "boolean" },
+        "reference_status": { "$ref": "#/$defs/reference_status" },
+        "lock_status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "reference_status": {
+      "type": "string",
+      "enum": ["pending", "complete", "not_required"]
+    },
+    "crowd": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "display_name",
+        "description",
+        "appears_in",
+        "speaks",
+        "visual_status",
+        "reference_status",
+        "lock_status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CROWD-[0-9]{2}$"
+        },
+        "display_name": { "type": "string" },
+        "description": { "type": "string" },
+        "appears_in": { "type": "string" },
+        "speaks": { "type": "boolean" },
+        "visual_status": { "type": "string" },
+        "reference_status": { "$ref": "#/$defs/reference_status" },
+        "lock_status": { "$ref": "#/$defs/status" }
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "condition", "effect"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^TRIG_[0-9]{2}$"
+        },
+        "name": { "type": "string" },
+        "condition": { "type": "string" },
+        "effect": { "type": "string" }
+      }
+    },
+    "production": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_mode",
+        "failure_policy",
+        "project_root",
+        "media_root",
+        "file_patterns",
+        "model_workflow_version",
+        "existing_project_id"
+      ],
+      "properties": {
+        "asset_mode": { "type": "string" },
+        "failure_policy": {
+          "type": "string",
+          "enum": ["fail_fast", "auto_repair"]
+        },
+        "project_root": { "type": "string" },
+        "media_root": { "type": "string" },
+        "file_patterns": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "model_workflow_version": { "type": "string" },
+        "existing_project_id": { "type": "string" }
+      }
+    },
+    "confirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lock_status",
+        "rights_status",
+        "confirmed",
+        "pending",
+        "forbidden",
+        "change_log"
+      ],
+      "properties": {
+        "lock_status": { "$ref": "#/$defs/status" },
+        "rights_status": { "$ref": "#/$defs/license_status" },
+        "confirmed": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "pending": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "forbidden": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "change_log": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/change_log_item" }
+        }
+      }
+    },
+    "change_log_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "change", "impact", "actor"],
+      "properties": {
+        "date": { "type": "string" },
+        "change": { "type": "string" },
+        "impact": { "type": "string" },
+        "actor": { "type": "string" }
+      }
+    },
+    "media_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "path", "status"],
+      "properties": {
+        "type": { "type": "string" },
+        "path": { "type": "string" },
+        "status": { "type": "string" }
+      }
+    }
+  }
+}

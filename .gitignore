@@ -1,0 +1,17 @@
+media/
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.mp3
+*.m4a
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.psd
+*.prproj
+*.prprojtmp
+Thumbs.db
+.DS_Store
+node_modules/
