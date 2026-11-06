@@ -50,6 +50,64 @@ function tierText(value) {
   );
 }
 
+function statusText(value) {
+  return (
+    {
+      draft: "草稿",
+      partial: "部分确认",
+      locked: "已锁定",
+      changed: "已变更",
+      archived: "已归档",
+      complete: "完整",
+      pending: "待确认",
+      not_required: "不需要",
+      hands_only: "仅手部",
+      simplified: "简化",
+    }[value] || value
+  );
+}
+
+function licenseText(value) {
+  return (
+    {
+      pending: "待确认",
+      confirmed: "已确认",
+      not_required: "不需要",
+      risk: "有风险",
+    }[value] || value
+  );
+}
+
+function displayText(value) {
+  return (
+    {
+      "zh-CN": "中文",
+      hard: "硬字幕",
+      soft: "软字幕",
+      game_fan_work: "游戏二创",
+      auto_generate: "自动生成",
+      existing: "已有资产",
+      fail_fast: "立即返回",
+      auto_repair: "自动修复",
+      ai_generated: "AI 生成",
+      commercial_free: "可商用免费素材",
+    }[value] || value
+  );
+}
+
+function referenceText(references) {
+  if (!references) {
+    return "-";
+  }
+  if (references.status === "not_required") {
+    return "不需要";
+  }
+  if ((references.items || []).length) {
+    return `${statusText(references.status)}；${references.items.join("；")}`;
+  }
+  return "待补";
+}
+
 function main() {
   const filePath = resolveProjectFile(process.argv[2]);
   if (!fs.existsSync(filePath)) {
@@ -60,6 +118,7 @@ function main() {
   const format = project.format || {};
   const rights = project.rights || {};
   const story = project.story || {};
+  const audio = project.audio || {};
   const production = project.production || {};
   const confirmation = project.confirmation || {};
 
@@ -87,22 +146,22 @@ function main() {
   lines.push("| 项目 | 值 |");
   lines.push("|---|---|");
   lines.push(`| 项目 ID | ${cell(project.project_id)} |`);
-  lines.push(`| 作品类型 | ${cell(rights.work_type)} |`);
+  lines.push(`| 作品类型 | ${cell(displayText(rights.work_type))} |`);
   lines.push(`| 来源 IP | ${cell(rights.source_ip)} |`);
   lines.push(`| 平台 | ${cell(format.platform)} |`);
   lines.push(`| 总时长 | ${cell(format.duration_sec)} 秒 |`);
   lines.push(`| 单元结构 | ${cell(format.unit_count)} × ${cell(format.unit_seconds)} 秒 |`);
   lines.push(`| 画幅 | ${cell(format.aspect_ratio)}；${cell(format.resolution)}；${cell(format.fps)} FPS |`);
   lines.push(`| 画幅说明 | ${cell(format.aspect_ratio_note || "-")} |`);
-  lines.push(`| 语言 | ${cell(format.language)} |`);
-  lines.push(`| 字幕 | ${cell(format.subtitles)} |`);
+  lines.push(`| 语言 | ${cell(displayText(format.language))} |`);
+  lines.push(`| 字幕 | ${cell(displayText(format.subtitles))} |`);
   lines.push(`| BGM | ${cell(format.bgm)} |`);
   lines.push(`| 受众 | ${cell(format.audience)} |`);
   lines.push(`| 类型与情绪 | ${cell(format.genre)} |`);
   lines.push("");
   lines.push("## 2. 版权与素材锁");
   lines.push("");
-  lines.push(`- 整体状态：${rights.status}`);
+  lines.push(`- 整体状态：${licenseText(rights.status)}`);
   lines.push(`- 原作使用范围：${rights.original_scope}`);
   lines.push(`- 角色使用边界：${rights.character_scope}`);
   lines.push(`- 平台规则：${rights.platform_rules}`);
@@ -116,14 +175,14 @@ function main() {
     ["视频", rights.video],
   ]) {
     lines.push(
-      `| ${name} | ${cell(value?.mode)} | ${cell(value?.license_status)} | ${cell(value?.note || "-")} |`,
+      `| ${name} | ${cell(displayText(value?.mode))} | ${cell(licenseText(value?.license_status))} | ${cell(value?.note || "-")} |`,
     );
   }
   lines.push(
     `| AI 素材 | ${rights.ai_assets?.allowed ? "允许" : "不允许"} | - | ${cell(rights.ai_assets?.note || "-")} |`,
   );
   lines.push(
-    `| 署名 | - | ${cell(rights.attribution?.status)} | ${cell(rights.attribution?.text || "待补充")} |`,
+    `| 署名 | - | ${cell(licenseText(rights.attribution?.status))} | ${cell(rights.attribution?.text || "待补充")} |`,
   );
   lines.push("");
   lines.push("## 3. 故事事实锁");
@@ -161,12 +220,12 @@ function main() {
   lines.push("|---|---|---|---|---|---|---|---|---|---|---|");
   for (const character of project.characters || []) {
     lines.push(
-      `| ${cell(character.display_name)} | ${cell(character.id)} | ${cell(tierText(character.tier))} | ${cell(character.relationship)} | ${cell(character.appears_in)} | ${character.speaks ? "是" : "否"} | ${cell(character.visual_lock?.status)} | ${cell(character.voice_lock?.status)} | ${cell(character.references?.status)} | ${cell(character.rights_status)} | ${cell(character.lock_status)} |`,
+      `| ${cell(character.display_name)} | ${cell(character.id)} | ${cell(tierText(character.tier))} | ${cell(character.relationship)} | ${cell(character.appears_in)} | ${character.speaks ? "是" : "否"} | ${cell(statusText(character.visual_lock?.status))} | ${cell(statusText(character.voice_lock?.status))} | ${cell(statusText(character.references?.status))} | ${cell(licenseText(character.rights_status))} | ${cell(statusText(character.lock_status))} |`,
     );
   }
   for (const crowd of project.crowd_groups || []) {
     lines.push(
-      `| ${cell(crowd.display_name)} | ${cell(crowd.id)} | 群演 | ${cell(crowd.description)} | ${cell(crowd.appears_in)} | ${crowd.speaks ? "是" : "否"} | ${cell(crowd.visual_status)} | 不需要 | ${cell(crowd.reference_status)} | - | ${cell(crowd.lock_status)} |`,
+      `| ${cell(crowd.display_name)} | ${cell(crowd.id)} | 群演 | ${cell(crowd.description)} | ${cell(crowd.appears_in)} | ${crowd.speaks ? "是" : "否"} | ${cell(statusText(crowd.visual_status))} | 不需要 | ${cell(statusText(crowd.reference_status))} | - | ${cell(statusText(crowd.lock_status))} |`,
     );
   }
   lines.push("");
@@ -186,9 +245,9 @@ function main() {
     lines.push(`- 声线文件：${character.voice_lock?.file || "待补"}`);
     lines.push(`- 连续性：${character.continuity || "-"}`);
     lines.push(`- 变体：${(character.variants || []).join("；") || "无"}`);
-    lines.push(`- 参考图：${character.references?.status || "-"}；${(character.references?.items || []).join("；") || "待补"}`);
-    lines.push(`- 授权状态：${character.rights_status}`);
-    lines.push(`- 锁定状态：${character.lock_status}`);
+    lines.push(`- 参考图：${referenceText(character.references)}`);
+    lines.push(`- 授权状态：${licenseText(character.rights_status)}`);
+    lines.push(`- 锁定状态：${statusText(character.lock_status)}`);
   }
   lines.push("");
   lines.push("## 6. 场景、道具、群演与文字锁");
@@ -199,7 +258,7 @@ function main() {
   lines.push("|---|---|---|---|---|---|---|");
   for (const scene of project.scenes || []) {
     lines.push(
-      `| ${cell(scene.display_name)} | ${cell(scene.id)} | ${cell(scene.layout)} | ${cell(scene.lighting)} | ${scene.reusable ? "是" : "否"} | ${cell(scene.reference_status)} | ${cell(scene.lock_status)} |`,
+      `| ${cell(scene.display_name)} | ${cell(scene.id)} | ${cell(scene.layout)} | ${cell(scene.lighting)} | ${scene.reusable ? "是" : "否"} | ${cell(statusText(scene.reference_status))} | ${cell(statusText(scene.lock_status))} |`,
     );
   }
   lines.push("");
@@ -209,7 +268,7 @@ function main() {
   lines.push("|---|---|---|---|---|---|---|");
   for (const prop of project.props || []) {
     lines.push(
-      `| ${cell(prop.display_name)} | ${cell(prop.id)} | ${cell(prop.holder)} | ${cell(prop.state_changes)} | ${cell(prop.trigger)} | ${prop.uses_reference ? "是" : "否"} | ${cell(prop.lock_status)} |`,
+      `| ${cell(prop.display_name)} | ${cell(prop.id)} | ${cell(prop.holder)} | ${cell(prop.state_changes)} | ${cell(prop.trigger)} | ${prop.uses_reference ? "是" : "否"} | ${cell(statusText(prop.lock_status))} |`,
     );
   }
   lines.push("");
@@ -229,7 +288,7 @@ function main() {
   lines.push("|---|---|---|---|---|---|---|");
   for (const crowd of project.crowd_groups || []) {
     lines.push(
-      `| ${cell(crowd.display_name)} | ${cell(crowd.id)} | ${cell(crowd.description)} | ${cell(crowd.appears_in)} | ${cell(crowd.visual_status)} | ${cell(crowd.reference_status)} | ${cell(crowd.lock_status)} |`,
+      `| ${cell(crowd.display_name)} | ${cell(crowd.id)} | ${cell(crowd.description)} | ${cell(crowd.appears_in)} | ${cell(statusText(crowd.visual_status))} | ${cell(statusText(crowd.reference_status))} | ${cell(statusText(crowd.lock_status))} |`,
     );
   }
   lines.push("");
@@ -241,19 +300,20 @@ function main() {
   lines.push("");
   lines.push("## 7. 声音与后期锁");
   lines.push("");
-  lines.push("- 对白：有；中文");
-  lines.push(`- BGM：${format.bgm}`);
-  lines.push("- 环境声：甜品店轻微环境底噪");
-  lines.push("- 动作声：手指敲玻璃、小跑脚步、礼盒抓取摩擦等轻音效");
-  lines.push("- 混音目标：人声优先，符合小红书短视频响度标准");
-  lines.push("- 字幕：硬字幕，仅三句台词；无片头片尾");
+  lines.push(`- 对白：${audio.dialogue}`);
+  lines.push(`- 旁白：${audio.narration}`);
+  lines.push(`- BGM：${audio.bgm}`);
+  lines.push(`- 环境声：${audio.ambience}`);
+  lines.push(`- 动作声：${audio.foley}`);
+  lines.push(`- 混音目标：${audio.mix_target}`);
+  lines.push(`- 字幕：${audio.subtitle_note}`);
   lines.push("");
   lines.push("## 8. 生产参数");
   lines.push("");
   lines.push("| 项目 | 值 |");
   lines.push("|---|---|");
-  lines.push(`| 资产模式 | ${cell(production.asset_mode)} |`);
-  lines.push(`| 失败策略 | ${cell(production.failure_policy)} |`);
+  lines.push(`| 资产模式 | ${cell(displayText(production.asset_mode))} |`);
+  lines.push(`| 失败策略 | ${cell(displayText(production.failure_policy))} |`);
   lines.push(`| 项目根 | ${cell(production.project_root)} |`);
   lines.push(`| 媒体根 | ${cell(production.media_root)} |`);
   lines.push(`| 模型/工作流版本 | ${cell(production.model_workflow_version || "待填写")} |`);
@@ -264,16 +324,19 @@ function main() {
   lines.push("");
   lines.push("## 9. 确认汇总");
   lines.push("");
-  lines.push(`- 锁定状态：${confirmation.lock_status}`);
-  lines.push(`- 版权状态：${confirmation.rights_status}`);
+  lines.push(`- 锁定状态：${statusText(confirmation.lock_status)}`);
+  lines.push(`- 版权状态：${licenseText(confirmation.rights_status)}`);
   lines.push("");
   lines.push("### 已确认");
+  lines.push("");
   lines.push(list(confirmation.confirmed));
   lines.push("");
   lines.push("### 待确认");
+  lines.push("");
   lines.push(list(confirmation.pending));
   lines.push("");
   lines.push("### 禁止改动");
+  lines.push("");
   lines.push(list(confirmation.forbidden));
   lines.push("");
   lines.push("### 变更记录");

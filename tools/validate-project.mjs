@@ -12,6 +12,7 @@ const requiredTopLevel = [
   "format",
   "rights",
   "story",
+  "audio",
   "characters",
   "scenes",
   "props",
