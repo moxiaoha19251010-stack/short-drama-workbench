@@ -1,0 +1,277 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/short-drama-generation.schema.json",
+  "title": "Short Drama Generation Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "project_id",
+    "source_script",
+    "default_provider",
+    "units"
+  ],
+  "properties": {
+    "schema": {
+      "const": "short-drama-generation/v1"
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]+$"
+    },
+    "source_script": {
+      "type": "string",
+      "pattern": "^[^/\\\\]"
+    },
+    "default_provider": {
+      "type": "string"
+    },
+    "unit_overrides": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/unit"
+      }
+    }
+  },
+  "$defs": {
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "duration_sec",
+        "segments",
+        "shots",
+        "cast",
+        "scene",
+        "assets",
+        "references",
+        "audio",
+        "dialogue",
+        "sound",
+        "change",
+        "entry_anchor",
+        "exit_anchor",
+        "trigger",
+        "link"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^U[0-9]{2}$"
+        },
+        "duration_sec": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "time": {
+          "type": "string"
+        },
+        "segments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/segment"
+          }
+        },
+        "shots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/shot"
+          }
+        },
+        "cast": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/named_asset"
+          }
+        },
+        "scene": {
+          "type": "string"
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/named_asset"
+          }
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          }
+        },
+        "audio": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/audio"
+          }
+        },
+        "dialogue": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dialogue"
+          }
+        },
+        "sound": {
+          "type": "string"
+        },
+        "change": {
+          "type": "string"
+        },
+        "entry_anchor": {
+          "type": "string"
+        },
+        "exit_anchor": {
+          "type": "string"
+        },
+        "trigger": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "declared_split": {
+          "type": "string"
+        }
+      }
+    },
+    "segment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "start_sec", "end_sec"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "start_sec": {
+          "type": "number"
+        },
+        "end_sec": {
+          "type": "number"
+        }
+      }
+    },
+    "shot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "start_sec", "end_sec", "shot_size", "action", "cut_reason"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "start_sec": {
+          "type": "number"
+        },
+        "end_sec": {
+          "type": "number"
+        },
+        "shot_size": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "cut_reason": {
+          "type": "string"
+        }
+      }
+    },
+    "named_asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["number", "id", "name", "kind"],
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["character", "scene", "prop", "crowd", "video"]
+        }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slot", "speaker_id", "name", "duration_sec"],
+      "properties": {
+        "slot": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "speaker_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "duration_sec": {
+          "type": "number",
+          "minimum": 0
+        },
+        "file_name": {
+          "type": "string"
+        }
+      }
+    },
+    "dialogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["speaker_id", "mode", "text"],
+      "properties": {
+        "speaker_id": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["on_screen", "off_screen"]
+        },
+        "text": {
+          "type": "string"
+        },
+        "start_sec": {
+          "type": ["number", "null"]
+        },
+        "end_sec": {
+          "type": ["number", "null"]
+        }
+      }
+    }
+  }
+}

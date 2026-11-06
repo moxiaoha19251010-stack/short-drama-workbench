@@ -1,0 +1,22 @@
+{
+  "schema": "short-drama-provider/v1",
+  "id": "generic-video",
+  "label": "通用视频提示词包",
+  "transport": "manual",
+  "capability_status": "unknown",
+  "notes": "模型无关兜底适配器；不假设任何厂商的分辨率、参考素材或音频能力。",
+  "capabilities": {
+    "max_clip_seconds": null,
+    "supported_segments": null,
+    "max_image_refs": null,
+    "max_audio_refs": null,
+    "max_video_refs": null,
+    "audio_clip_max_seconds": null,
+    "audio_total_max_seconds": null,
+    "supports_audio_reference": null,
+    "supports_video_reference": null,
+    "supports_seed": null,
+    "aspect_ratios": null
+  },
+  "prompt_format": "generic-natural-language"
+}

@@ -274,6 +274,11 @@
       "effect": "草莓蛋糕被打包为礼盒，若娜瓦随后折返拿走"
     }
   ],
+  "generation": {
+    "default_provider": "generic-video",
+    "unit_overrides": {},
+    "prompt_enhancer": "none"
+  },
   "production": {
     "asset_mode": "auto_generate",
     "failure_policy": "fail_fast",

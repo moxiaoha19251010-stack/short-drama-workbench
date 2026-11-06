@@ -1,0 +1,22 @@
+{
+  "schema": "short-drama-provider/v1",
+  "id": "minimax-h3",
+  "label": "MiniMax H3（legacy）",
+  "transport": "comfyui",
+  "capability_status": "legacy",
+  "notes": "现有 H3 链保持原样。生成计划可以引用该 provider，但第一版不接管旧 H3 包，后续再加兼容编译器。",
+  "capabilities": {
+    "max_clip_seconds": 10.125,
+    "supported_segments": [10, 5],
+    "max_image_refs": 9,
+    "max_audio_refs": 3,
+    "max_video_refs": 1,
+    "audio_clip_max_seconds": 4.5,
+    "audio_total_max_seconds": 15,
+    "supports_audio_reference": true,
+    "supports_video_reference": true,
+    "supports_seed": true,
+    "aspect_ratios": ["9:16"]
+  },
+  "prompt_format": "h3-six-section"
+}

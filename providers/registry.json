@@ -1,0 +1,24 @@
+{
+  "schema": "short-drama-provider-registry/v1",
+  "default": "generic-video",
+  "providers": [
+    {
+      "id": "generic-video",
+      "label": "通用视频提示词包",
+      "path": "providers/generic-video/provider.json",
+      "compiler": "providers/generic-video/compiler.mjs"
+    },
+    {
+      "id": "seedance-2.5",
+      "label": "Seedance 2.5（手动提示词包）",
+      "path": "providers/seedance-2.5/provider.json",
+      "compiler": "providers/seedance-2.5/compiler.mjs"
+    },
+    {
+      "id": "minimax-h3",
+      "label": "MiniMax H3（legacy）",
+      "path": "providers/minimax-h3/provider.json",
+      "compiler": null
+    }
+  ]
+}

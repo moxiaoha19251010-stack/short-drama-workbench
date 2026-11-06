@@ -105,6 +105,19 @@ node tools/render-project.mjs projects/若娜瓦的草莓蛋糕
 
 仓库已配置 GitHub Actions：在 GitHub 网页修改 `project.json` 并提交后，云端会自动校验并重新生成 `项目档.md`，不需要公司电脑安装 Node。
 
+## 通用视频生成层
+
+镜头剧本格式保持不变。新增的 `generation/` 是旁路层：
+
+```text
+章01_镜头剧本.md
+  → generation/plan.json
+  → providers/<provider>/Uxx_prompt.md
+  → 人工或已有工作流生成
+```
+
+详细说明见 `docs/GENERATION.md`。现有金鱼单元音频面板和 H3 runner 不改。
+
 ## 与 Basic Memory 的关系
 
 Basic Memory 只做归档和知识库。项目稳定后，从 `项目档.md` 导出**一份**归档笔记，不再把项目拆成十几个本地文件维护。

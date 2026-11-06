@@ -119,6 +119,7 @@ function main() {
   const rights = project.rights || {};
   const story = project.story || {};
   const audio = project.audio || {};
+  const generation = project.generation || {};
   const production = project.production || {};
   const confirmation = project.confirmation || {};
 
@@ -309,6 +310,12 @@ function main() {
   lines.push(`- 字幕：${audio.subtitle_note}`);
   lines.push("");
   lines.push("## 8. 生产参数");
+  lines.push("");
+  lines.push("| 生成适配 | 值 |");
+  lines.push("|---|---|");
+  lines.push(`| 默认模型 | ${cell(generation.default_provider || "generic-video")} |`);
+  lines.push(`| 单元覆盖 | ${cell(JSON.stringify(generation.unit_overrides || {}))} |`);
+  lines.push(`| 增强器 | ${cell(generation.prompt_enhancer || "none")} |`);
   lines.push("");
   lines.push("| 项目 | 值 |");
   lines.push("|---|---|");

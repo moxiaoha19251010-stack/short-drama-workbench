@@ -1,0 +1,22 @@
+{
+  "schema": "short-drama-provider/v1",
+  "id": "seedance-2.5",
+  "label": "Seedance 2.5（手动提示词包）",
+  "transport": "manual",
+  "capability_status": "draft",
+  "notes": "首版只输出通用提示词包和参数占位；具体参考图、音频、时长和画幅能力以官方文档核实后填入，不猜测。",
+  "capabilities": {
+    "max_clip_seconds": null,
+    "supported_segments": null,
+    "max_image_refs": null,
+    "max_audio_refs": null,
+    "max_video_refs": null,
+    "audio_clip_max_seconds": null,
+    "audio_total_max_seconds": null,
+    "supports_audio_reference": null,
+    "supports_video_reference": null,
+    "supports_seed": null,
+    "aspect_ratios": null
+  },
+  "prompt_format": "seedance-manual"
+}

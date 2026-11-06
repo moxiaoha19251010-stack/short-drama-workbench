@@ -35,6 +35,17 @@ jobs:
             node tools/render-project.mjs "$dir"
           done
 
+      - name: Validate generation layer
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test tools/test-generation.mjs
+          shopt -s nullglob
+          for plan in projects/*/generation/plan.json; do
+            dir="$(dirname "$(dirname "$plan")")"
+            node tools/validate-generation.mjs "$dir"
+          done
+
       - name: Commit generated docs
         shell: bash
         run: |

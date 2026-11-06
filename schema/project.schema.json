@@ -89,6 +89,25 @@
         "$ref": "#/$defs/trigger"
       }
     },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "default_provider": {
+          "type": "string"
+        },
+        "unit_overrides": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "prompt_enhancer": {
+          "type": "string",
+          "enum": ["none", "optional"]
+        }
+      }
+    },
     "production": {
       "$ref": "#/$defs/production"
     },
