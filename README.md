@@ -7,6 +7,20 @@
 
 媒体文件不进入 Git。图片、音频、视频放在独立媒体目录，项目 JSON 只记录相对路径和媒体清单。
 
+## 日常使用
+
+仓库地址：
+
+```text
+https://github.com/moxiaoha19251010-stack/short-drama-workbench
+```
+
+1. 在任意电脑打开上面的 GitHub 仓库。
+2. 阅读 `projects/若娜瓦的草莓蛋糕/项目档.md`，这是给人看的中文项目档。
+3. 需要修改时，编辑 `projects/若娜瓦的草莓蛋糕/project.json`。
+4. 提交后 GitHub Actions 会自动校验并重新生成 `项目档.md`，公司电脑不需要安装 Node。
+5. 需要继续做短剧时，把 `项目档.md` 或 `project.json` 复制给外部 AI 或 Codex。
+
 ## 当前项目
 
 - `projects/若娜瓦的草莓蛋糕/project.json`
