@@ -21,6 +21,61 @@ https://github.com/moxiaoha19251010-stack/short-drama-workbench
 4. 提交后 GitHub Actions 会自动校验并重新生成 `项目档.md`，公司电脑不需要安装 Node。
 5. 需要继续做短剧时，把 `项目档.md` 或 `project.json` 复制给外部 AI 或 Codex。
 
+## 多电脑同步
+
+GitHub 仓库是同步中枢。每台电脑各自 clone 一份，不要用 OneDrive、坚果云或网盘直接同步整个 `.git` 工作区。
+
+### 新电脑第一次连接
+
+```powershell
+git clone https://github.com/moxiaoha19251010-stack/short-drama-workbench.git
+cd short-drama-workbench
+git config user.name "你的 GitHub 用户名"
+git config user.email "你的 GitHub 邮箱"
+```
+
+### 每次开始修改前
+
+```powershell
+git pull --rebase
+```
+
+先拉取另一台电脑或 GitHub Actions 生成的最新内容，再编辑 `project.json`。
+
+### 修改完成后
+
+```powershell
+git status
+git add .
+git commit -m "update: 说明本次改了什么"
+git push
+```
+
+推送后 GitHub Actions 会自动校验并更新 `项目档.md`。
+
+### 不装 Git 的电脑
+
+直接在 GitHub 网页编辑 `project.json` 并提交即可。网页提交也会触发自动校验和项目档生成；查看时打开 `项目档.md`，不需要安装 Node。
+
+### 媒体文件
+
+图片、音频、视频不进入 Git。推荐把媒体放在 OneDrive 或外置硬盘的独立目录，再让项目里的 `media/<项目名>` 指向它。Windows 可以用目录联接：
+
+```powershell
+New-Item -ItemType Junction `
+  -Path "C:\Users\莫小哈\Documents\Codex\short-drama-workbench\media\若娜瓦的草莓蛋糕" `
+  -Target "C:\Users\莫小哈\OneDrive\短剧媒体\若娜瓦的草莓蛋糕"
+```
+
+这样 `project.json` 里的相对路径不变，换电脑只需要重新建立一次媒体目录连接。
+
+### 冲突规则
+
+- 两台电脑不要同时改同一个 `project.json`。
+- 每次编辑前先 `git pull --rebase`。
+- 出现冲突时手动合并，不要直接 `git push --force`。
+- GitHub Actions 自动生成的 `项目档.md` 不要手工修改。
+
 ## 当前项目
 
 - `projects/若娜瓦的草莓蛋糕/project.json`
