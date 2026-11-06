@@ -34,6 +34,8 @@ node tools/render-project.mjs projects/若娜瓦的草莓蛋糕
 
 如果当前电脑没有 Node，可以在 GitHub 网页编辑 `project.json`，把生成任务交给有环境的电脑或后续浏览器工作台。
 
+仓库已配置 GitHub Actions：在 GitHub 网页修改 `project.json` 并提交后，云端会自动校验并重新生成 `项目档.md`，不需要公司电脑安装 Node。
+
 ## 与 Basic Memory 的关系
 
 Basic Memory 只做归档和知识库。项目稳定后，从 `项目档.md` 导出**一份**归档笔记，不再把项目拆成十几个本地文件维护。

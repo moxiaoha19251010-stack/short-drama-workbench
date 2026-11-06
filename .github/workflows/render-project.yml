@@ -1,0 +1,50 @@
+name: Render project package
+
+on:
+  push:
+    paths:
+      - "projects/**/project.json"
+      - "schema/**"
+      - "tools/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate and render
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          for project in projects/*/project.json; do
+            dir="$(dirname "$project")"
+            node tools/validate-project.mjs "$dir"
+            node tools/render-project.mjs "$dir"
+          done
+
+      - name: Commit generated docs
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- projects; then
+            echo "No generated changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add projects
+          git commit -m "chore: render project docs [skip ci]"
+          git push
