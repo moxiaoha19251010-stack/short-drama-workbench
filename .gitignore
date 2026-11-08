@@ -12,6 +12,10 @@ media/
 *.psd
 *.prproj
 *.prprojtmp
+*.aep
+*.prin
+*.pek
+*.cfa
 Thumbs.db
 .DS_Store
 node_modules/

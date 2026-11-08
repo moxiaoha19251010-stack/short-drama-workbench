@@ -9,15 +9,15 @@
     "note": "由外部 AI 开场确认对话归一化；未提交原始聊天记录"
   },
   "created_at": "2026-11-06",
-  "updated_at": "2026-11-06",
+  "updated_at": "2026-11-08",
   "format": {
     "platform": "小红书",
     "duration_sec": 30,
     "unit_seconds": 10,
     "unit_count": 3,
     "aspect_ratio": "16:9",
-    "aspect_ratio_note": "显式覆盖：16:9 横屏、1024x576、24FPS；后续横屏工作流按此参数适配",
-    "resolution": "1024x576",
+    "aspect_ratio_note": "显式覆盖：16:9 横屏；成片实测 1488x832、24FPS、30.667 秒；project.json 的 duration_sec 仍按 3×10 秒名义时长记 30 秒",
+    "resolution": "1488x832",
     "fps": 24,
     "language": "zh-CN",
     "subtitles": "hard",
@@ -153,20 +153,22 @@
       },
       "performance_lock": "外表矜持、内心可爱，轻微傲娇；允许轻微夸张的可爱反应，但不能丢失矜持气质。动作包括蹲姿隔玻璃比划食指、举手指索要、气呼呼跑开、抢礼盒抱在怀里、回头扭头傲娇哼。",
       "voice_lock": {
-        "status": "pending",
+        "status": "complete",
         "description": "清冷柔和少女声线；语速适中；情绪从期待到委屈生气，再到开心傲娇",
-        "file": "",
-        "source": "",
-        "duration_sec": 0
+        "file": "媒体素材/角色声线/DR-01_若娜瓦_声线_4s.mp3",
+        "source": "若娜瓦语音.mp3｜00:00.25 起 4.00 秒",
+        "duration_sec": 4
       },
       "continuity": "全程发型、头饰、瞳色、肤色、卫衣主体款式不变；无战损；持有状态从空手到怀抱蛋糕礼盒。",
       "variants": [],
       "references": {
-        "status": "pending",
-        "items": []
+        "status": "complete",
+        "items": [
+          "媒体素材/人物/DR-01_若娜瓦.png"
+        ]
       },
       "rights_status": "pending",
-      "lock_status": "partial"
+      "lock_status": "locked"
     },
     {
       "id": "DR-02",
@@ -194,20 +196,22 @@
       },
       "performance_lock": "手部动作轻柔，带逗弄感，没有粗暴动作；动作包括捏脸、摇晃食指和拿手机付款。",
       "voice_lock": {
-        "status": "pending",
+        "status": "complete",
         "description": "温柔、带一点逗弄感的年轻声线；语速平缓；说出台词“不行。”",
-        "file": "",
-        "source": "",
-        "duration_sec": 0
+        "file": "媒体素材/角色声线/DR-02_第一视角主角_声线_4s.mp3",
+        "source": "主角语音.mp3｜00:00.25 起 4.20 秒",
+        "duration_sec": 4.2
       },
       "continuity": "手部状态无变化；持有物为手机；全程不露脸。",
       "variants": [],
       "references": {
-        "status": "not_required",
-        "items": []
+        "status": "complete",
+        "items": [
+          "媒体素材/人物/DR-02_第一视角主角.png"
+        ]
       },
       "rights_status": "pending",
-      "lock_status": "partial"
+      "lock_status": "locked"
     }
   ],
   "crowd_groups": [
@@ -225,13 +229,23 @@
   "scenes": [
     {
       "id": "SCENE_01",
-      "display_name": "甜品店室内",
-      "layout": "甜品玻璃展示柜在前，店内有通行空间，门口在画面一侧",
-      "lighting": "白天室内暖调柔和漫射光；展示柜灯光明亮温暖",
+      "display_name": "蛋糕展柜与甜品店全景",
+      "layout": "现代法式甜品店室内，玻璃蛋糕展示柜、木质收银柜台、甜品制作区域、奶油色墙面、壁灯、装饰画、木质桌椅和吊灯；具备近景、中景、远景层次",
+      "lighting": "夜晚室内暖黄色均匀柔和灯光；玻璃与木质表面自然高光；窗外深蓝色夜景形成冷暖对比",
       "reusable": true,
-      "style_lock": "现代都市二次元甜品店；精致影视渲染；干净通透；中近景为主；禁止原神遗迹、魔神元素、品牌 logo、价格标签和支付界面文字",
-      "reference_status": "pending",
-      "lock_status": "partial"
+      "style_lock": "现代都市二次元甜品店；精致影视渲染；奶油白、浅焦糖色、暖胡桃木与香槟金主色调；禁止原神遗迹、魔神元素、品牌 logo、价格标签和支付界面文字",
+      "reference_status": "complete",
+      "lock_status": "locked"
+    },
+    {
+      "id": "SCENE_02",
+      "display_name": "甜品店入口与玻璃店门",
+      "layout": "同一家甜品店的室内入口区域，深色金属门框透明玻璃店门、金属门把手；透过玻璃可见室外夜景街景",
+      "lighting": "店内暖金黄色灯光；室外深蓝色夜空、路灯与建筑轮廓；室内外冷暖对比",
+      "reusable": true,
+      "style_lock": "与 SCENE_01 保持同一家法式甜品店的装修、材质和色调；禁止新增品牌、文字、价格标签和支付界面",
+      "reference_status": "complete",
+      "lock_status": "locked"
     }
   ],
   "props": [
@@ -242,8 +256,8 @@
       "state_changes": "柜中陈列 → 打包为礼盒",
       "trigger": "TRIG_01 付款完成",
       "uses_reference": true,
-      "reference_status": "pending",
-      "lock_status": "partial"
+      "reference_status": "complete",
+      "lock_status": "locked"
     },
     {
       "id": "PROP_02",
@@ -252,8 +266,8 @@
       "state_changes": "封闭礼盒状态",
       "trigger": "TRIG_01 付款完成后出现",
       "uses_reference": true,
-      "reference_status": "pending",
-      "lock_status": "partial"
+      "reference_status": "complete",
+      "lock_status": "locked"
     },
     {
       "id": "PROP_03",
@@ -262,8 +276,8 @@
       "state_changes": "屏幕亮起付款操作；画面内容不显示细节",
       "trigger": "TRIG_01",
       "uses_reference": false,
-      "reference_status": "not_required",
-      "lock_status": "partial"
+      "reference_status": "complete",
+      "lock_status": "locked"
     }
   ],
   "triggers": [
@@ -291,7 +305,7 @@
       "prop_reference": "<ID>_<中文名>.<ext>",
       "voice_reference": "<ID>_<中文名>_声线_<时长>s.<ext>"
     },
-    "model_workflow_version": "",
+    "model_workflow_version": "MiniMax H3 legacy + Qwen image + Premiere Pro",
     "existing_project_id": "new"
   },
   "confirmation": {
@@ -304,15 +318,15 @@
       "若娜瓦核心视觉锁和表演锁",
       "三句必须台词：一个。、不行。、哼。",
       "第一视角主角不露脸，只露手部和手臂",
-      "场景风格、甜品店空间和文字/UI 禁止项"
+      "场景风格、甜品店空间和文字/UI 禁止项",
+      "DR-01 和 DR-02 的声线参考文件、角色参考图、场景参考图和道具参考图已落盘",
+      "成品与硬字幕版已导出，实测 1488x832、24FPS、30.667 秒"
     ],
     "pending": [
       "原神 IP 二创角色素材版权风险评估",
       "BGM 具体曲目和音乐商用授权",
       "字幕字体具体选型和商用授权",
-      "发布署名规则",
-      "DR-01 和 DR-02 的实际声线参考文件与裁切",
-      "DR-01 角色参考图、四视图和场景/道具参考图"
+      "发布署名规则"
     ],
     "forbidden": [
       "不改变事件顺序和三句必须台词",
@@ -340,8 +354,91 @@
         "change": "将最终确认归一化为单项目 JSON 主数据",
         "impact": "项目包结构、ID、状态和待确认项统一",
         "actor": "Codex"
+      },
+      {
+        "date": "2026-11-07",
+        "change": "完成 H3 视频生成、Premiere 后期、成品与硬字幕版导出",
+        "impact": "成片实测 1488x832、24FPS、30.667 秒；项目名义时长仍为 3×10 秒",
+        "actor": "用户"
+      },
+      {
+        "date": "2026-11-08",
+        "change": "将 project.json 迁入 Basic Memory 项目根目录并同步文本项目包到 GitHub",
+        "impact": "Basic Memory 成为创作主工作区；GitHub 成为文本项目包同步中枢；媒体仍留在本地媒体目录",
+        "actor": "Codex"
       }
     ]
   },
-  "media_manifest": []
+  "media_manifest": [
+    {
+      "type": "character_reference",
+      "path": "媒体素材/人物/DR-01_若娜瓦.png",
+      "status": "approved"
+    },
+    {
+      "type": "character_reference",
+      "path": "媒体素材/人物/DR-02_第一视角主角.png",
+      "status": "approved"
+    },
+    {
+      "type": "scene_reference",
+      "path": "媒体素材/场景/SCENE_01_蛋糕展柜与甜品店全景.png",
+      "status": "approved"
+    },
+    {
+      "type": "scene_reference",
+      "path": "媒体素材/场景/SCENE_02_甜品店入口与玻璃店门.png",
+      "status": "approved"
+    },
+    {
+      "type": "prop_reference",
+      "path": "媒体素材/道具/PROP_01_展示柜草莓蛋糕.png",
+      "status": "approved"
+    },
+    {
+      "type": "prop_reference",
+      "path": "媒体素材/道具/PROP_02_蛋糕礼盒.png",
+      "status": "approved"
+    },
+    {
+      "type": "prop_reference",
+      "path": "媒体素材/道具/PROP_03_手机.png",
+      "status": "approved"
+    },
+    {
+      "type": "voice_reference",
+      "path": "媒体素材/角色声线/DR-01_若娜瓦_声线_4s.mp3",
+      "status": "approved"
+    },
+    {
+      "type": "voice_reference",
+      "path": "媒体素材/角色声线/DR-02_第一视角主角_声线_4s.mp3",
+      "status": "approved"
+    },
+    {
+      "type": "h3_samples",
+      "path": "剪辑/样片",
+      "status": "approved"
+    },
+    {
+      "type": "final_cut",
+      "path": "剪辑/成品.mp4",
+      "status": "approved"
+    },
+    {
+      "type": "final_subtitled",
+      "path": "剪辑/成品字幕.mp4",
+      "status": "approved"
+    },
+    {
+      "type": "premiere_project",
+      "path": "剪辑/若娜瓦的草莓蛋糕.prproj",
+      "status": "approved"
+    },
+    {
+      "type": "after_effects_project",
+      "path": "剪辑/若娜瓦的草莓蛋糕.aep",
+      "status": "approved"
+    }
+  ]
 }

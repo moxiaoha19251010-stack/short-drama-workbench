@@ -1,9 +1,11 @@
 # 短剧单项目包工作区
 
-这是跨电脑使用的短剧项目包仓库。每个项目只有两个核心文件：
+这是跨电脑使用的短剧项目包仓库。每个项目至少有两个核心文件：
 
 - `project.json`：唯一主数据，机器和工作台读取。
 - `项目档.md`：由 JSON 自动生成的中文项目档，给人阅读，不是主数据。
+
+创作阶段的 `创作蓝图.md`、`故事地图.md`、`章01_镜头剧本.md`、`设定库/`、`H3/`、`交接/` 和 `记录/验收记录.md` 也会同步到项目目录；媒体和剪辑工程不进入 Git。
 
 媒体文件不进入 Git。图片、音频、视频放在独立媒体目录，项目 JSON 只记录相对路径和媒体清单。
 
@@ -17,7 +19,7 @@ https://github.com/moxiaoha19251010-stack/short-drama-workbench
 
 1. 在任意电脑打开上面的 GitHub 仓库。
 2. 阅读 `projects/若娜瓦的草莓蛋糕/项目档.md`，这是给人看的中文项目档。
-3. 需要修改时，编辑 `projects/若娜瓦的草莓蛋糕/project.json`。
+3. 需要修改时，在 Basic Memory 项目目录编辑 `project.json` 和阶段文本，然后按“后期修改后重新上传”同步。
 4. 提交后 GitHub Actions 会自动校验并重新生成 `项目档.md`，公司电脑不需要安装 Node。
 5. 需要继续做短剧时，把 `项目档.md` 或 `project.json` 复制给外部 AI 或 Codex。
 
@@ -46,12 +48,45 @@ git pull --rebase
 
 ```powershell
 git status
-git add .
+git add "projects/若娜瓦的草莓蛋糕" "README.md" ".gitignore"
 git commit -m "update: 说明本次改了什么"
 git push
 ```
 
-推送后 GitHub Actions 会自动校验并更新 `项目档.md`。
+先确认 `git status` 里没有媒体、工程或缓存文件，再暂存。推送后 GitHub Actions 会自动校验并更新 `项目档.md`。
+
+### 后期修改后重新上传
+
+项目已经完成、只是改了剧本、设定、`project.json` 或成片时，按下面的顺序回传。完整命令解释见 Basic Memory《短剧全链路总览》第 4 节。
+
+1. 在 Basic Memory 项目目录保存修改。
+2. 进入仓库并先拉取：
+
+```powershell
+cd C:\Users\莫小哈\Documents\Codex\short-drama-workbench
+git pull --rebase
+```
+
+3. 只复制文本项目包到 `projects/若娜瓦的草莓蛋糕`：`project.json`、`创作蓝图.md`、`故事地图.md`、`章01_镜头剧本.md`、`设定库/`、`H3/`、`交接/`、`记录/验收记录.md`。
+4. 校验并重新生成项目档：
+
+```powershell
+node tools/validate-project.mjs "projects/若娜瓦的草莓蛋糕"
+node tools/render-project.mjs "projects/若娜瓦的草莓蛋糕"
+```
+
+5. 检查没有媒体或工程文件后提交：
+
+```powershell
+git status --short
+git add "projects/若娜瓦的草莓蛋糕" "README.md" ".gitignore"
+git commit -m "update: 同步若娜瓦完成状态与文本项目包"
+git push
+```
+
+6. 打开 GitHub Actions 确认 `Render project package` 成功；如果机器人提交了新的 `项目档.md`，本地再执行一次 `git pull --rebase`。
+
+图片、音频、视频、Premiere/AE 工程、`记录/备份/` 不进入 Git。`Copy-Item` 不会删除仓库里已经删除的旧文件，删除或重命名文本时要单独 `git rm` 或手工删除后再提交。
 
 ### 不装 Git 的电脑
 

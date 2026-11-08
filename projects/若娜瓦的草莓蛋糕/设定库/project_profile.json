@@ -1,0 +1,20 @@
+{
+  "schema": "drama-v2-project",
+  "version": 1,
+  "project_id": "genshin-ronova-strawberry-cake",
+  "episode_id": "S01E01",
+  "duration": 30,
+  "unit_seconds": 10,
+  "unit_count": 3,
+  "aspect_ratio": "16:9",
+  "game": "原神",
+  "asset_mode": "自动生成",
+  "failure_policy": "fail_fast",
+  "paths": {
+    "audio_lock": "设定库/角色音频锁.md",
+    "character_locks": "设定库/角色画像锁.md",
+    "style_lock": "设定库/场景风格锁.md",
+    "world_characters": "设定库/世界与角色.md"
+  },
+  "shot_script_checks": []
+}
