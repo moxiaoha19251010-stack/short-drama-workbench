@@ -1,4 +1,4 @@
-# 短剧单项目包工作区
+# 短剧项目包工作区
 
 这是跨电脑使用的短剧项目包仓库。每个项目至少有两个核心文件：
 
@@ -18,8 +18,8 @@ https://github.com/moxiaoha19251010-stack/short-drama-workbench
 ```
 
 1. 在任意电脑打开上面的 GitHub 仓库。
-2. 阅读 `projects/若娜瓦的草莓蛋糕/项目档.md`，这是给人看的中文项目档。
-3. 需要修改时，在 Basic Memory 项目目录编辑 `project.json` 和阶段文本，然后按“后期修改后重新上传”同步。
+2. 打开 `projects/<项目>/项目档.md`，这是给人看的中文项目档。
+3. 需要修改时，直接在 `projects/<项目>` 编辑 `project.json` 和阶段文本，然后按“项目文本修改后重新上传”同步。
 4. 提交后 GitHub Actions 会自动校验并重新生成 `项目档.md`，公司电脑不需要安装 Node。
 5. 需要继续做短剧时，把 `项目档.md` 或 `project.json` 复制给外部 AI 或 Codex。
 
@@ -48,18 +48,19 @@ git pull --rebase
 
 ```powershell
 git status
-git add "projects/若娜瓦的草莓蛋糕" "README.md" ".gitignore"
+$project = "projects/<项目>"
+git add $project "README.md" ".gitignore"
 git commit -m "update: 说明本次改了什么"
 git push
 ```
 
 先确认 `git status` 里没有媒体、工程或缓存文件，再暂存。推送后 GitHub Actions 会自动校验并更新 `项目档.md`。
 
-### 后期修改后重新上传
+### 项目文本修改后重新上传
 
 项目已经完成、只是改了剧本、设定、`project.json` 或成片时，按下面的顺序回传。完整命令解释见 Basic Memory《短剧全链路总览》第 4 节。
 
-1. 在 Basic Memory 项目目录保存修改。
+1. 在 `projects/<项目>` 保存修改；若项目源稿另存在 Basic Memory，只同步文本，不复制媒体。
 2. 进入仓库并先拉取：
 
 ```powershell
@@ -67,20 +68,21 @@ cd C:\Users\莫小哈\Documents\Codex\short-drama-workbench
 git pull --rebase
 ```
 
-3. 只复制文本项目包到 `projects/若娜瓦的草莓蛋糕`：`project.json`、`创作蓝图.md`、`故事地图.md`、`章01_镜头剧本.md`、`设定库/`、`H3/`、`交接/`、`记录/验收记录.md`。
+3. 文本项目包只包含 `project.json`、`创作蓝图.md`、`故事地图.md`、`章01_镜头剧本.md`、`设定库/`、`H3/`、`交接/`、`记录/验收记录.md`；路径统一使用 `projects/<项目>`。
 4. 校验并重新生成项目档：
 
 ```powershell
-node tools/validate-project.mjs "projects/若娜瓦的草莓蛋糕"
-node tools/render-project.mjs "projects/若娜瓦的草莓蛋糕"
+$project = "projects/<项目>"
+node tools/validate-project.mjs $project
+node tools/render-project.mjs $project
 ```
 
 5. 检查没有媒体或工程文件后提交：
 
 ```powershell
 git status --short
-git add "projects/若娜瓦的草莓蛋糕" "README.md" ".gitignore"
-git commit -m "update: 同步若娜瓦完成状态与文本项目包"
+git add $project "README.md" ".gitignore"
+git commit -m "update: 同步项目文本包"
 git push
 ```
 
@@ -97,9 +99,10 @@ git push
 图片、音频、视频不进入 Git。推荐把媒体放在 OneDrive 或外置硬盘的独立目录，再让项目里的 `media/<项目名>` 指向它。Windows 可以用目录联接：
 
 ```powershell
+$project = "项目名"
 New-Item -ItemType Junction `
-  -Path "C:\Users\莫小哈\Documents\Codex\short-drama-workbench\media\若娜瓦的草莓蛋糕" `
-  -Target "C:\Users\莫小哈\OneDrive\短剧媒体\若娜瓦的草莓蛋糕"
+  -Path "C:\Users\莫小哈\Documents\Codex\short-drama-workbench\media\$project" `
+  -Target "C:\Users\莫小哈\OneDrive\短剧媒体\$project"
 ```
 
 这样 `project.json` 里的相对路径不变，换电脑只需要重新建立一次媒体目录连接。
@@ -115,6 +118,8 @@ New-Item -ItemType Junction `
 
 - `projects/若娜瓦的草莓蛋糕/project.json`
 - `projects/若娜瓦的草莓蛋糕/项目档.md`
+- `projects/阿哈：关于我今天如何给银河系添堵/project.json`
+- `projects/阿哈：关于我今天如何给银河系添堵/项目档.md`
 
 ## 在任意电脑查看
 
@@ -123,8 +128,9 @@ New-Item -ItemType Junction `
 ## 在本机校验和生成
 
 ```powershell
-node tools/validate-project.mjs projects/若娜瓦的草莓蛋糕
-node tools/render-project.mjs projects/若娜瓦的草莓蛋糕
+$project = "projects/<项目>"
+node tools/validate-project.mjs $project
+node tools/render-project.mjs $project
 ```
 
 `render-project.mjs` 会覆盖 `项目档.md`。不要手工把 `项目档.md` 当作主数据修改。

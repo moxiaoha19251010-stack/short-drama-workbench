@@ -1,0 +1,307 @@
+{
+  "schema": "short-drama-project/v1",
+  "project_id": "star-rail-aha-galaxy-prank",
+  "title": "阿哈：关于我今天如何给银河系添堵",
+  "status": "draft",
+  "source": {
+    "tool": "gemini",
+    "confirmed_at": "2026-11-11",
+    "note": "Basic Memory《米三家三剧本实操》剧本三；Gemini 分镜稿只作为导演源稿，归一并扩写为 90 秒 9 单元，不直接作为镜头剧本"
+  },
+  "created_at": "2026-11-11",
+  "updated_at": "2026-11-11",
+  "format": {
+    "platform": "小红书",
+    "duration_sec": 90,
+    "unit_seconds": 10,
+    "unit_count": 9,
+    "aspect_ratio": "9:16",
+    "resolution": "1080x1920",
+    "fps": 24,
+    "language": "zh-CN",
+    "subtitles": "hard",
+    "bgm": "无 BGM；仅阿哈人声、环境声与动作音效",
+    "audience": "小红书星铁玩家、二创与抽象整活受众",
+    "genre": "游戏二创 / 打破第四面墙 / meta 整活喜剧"
+  },
+  "rights": {
+    "status": "pending",
+    "source_ip": "崩坏：星穹铁道",
+    "work_type": "game_fan_work",
+    "character_scope": "仅阿哈作为稳定出镜与说话角色；星神与帕姆等只以扁平梗图剪影出现，不建立角色资产、不配音",
+    "original_scope": "90 秒 meta 二创短剧；借用抽卡、阿哈和欢愉整活概念，不进入游戏主线时间线",
+    "music": {
+      "mode": "none",
+      "license_status": "not_required",
+      "note": "全片无 BGM，不使用任何音乐"
+    },
+    "fonts": {
+      "mode": "user_supplied",
+      "license_status": "pending",
+      "note": "字体由用户自行选型并提供，发布前确认商用许可"
+    },
+    "images": {
+      "mode": "user_supplied",
+      "license_status": "pending",
+      "note": "参考图、场景图、道具图与成片画面均由用户自行建立；禁止复用官方原图、游戏截图或带 Logo 的画面"
+    },
+    "video": {
+      "mode": "user_supplied",
+      "license_status": "pending",
+      "note": "视频素材与生成片段由用户自行建立；伪抽卡界面必须是原创重绘的二创演绎"
+    },
+    "ai_assets": {
+      "allowed": true,
+      "note": "用户可自行决定制作工具；本仓库不生成图片、声线或视频"
+    },
+    "attribution": {
+      "status": "pending",
+      "text": "需标注崩坏：星穹铁道二创，发布前确认署名格式"
+    },
+    "platform_rules": "遵守小红书游戏二创规范；不使用官方原图、原片、Logo、水印或真实支付界面；伪抽卡 UI 必须明确可辨为二创演绎"
+  },
+  "story": {
+    "logline": "玩家终于等到大保底金光，阿哈却一口吞掉奖励，把一周恶作剧当成欢愉业绩展示，最后用加班、刷遗器和防御力词条逼玩家接受这桩荒唐交易。",
+    "protagonist_goal": "阿哈要夺走玩家的抽卡期待，把宇宙万物都变成取悦自己的乐子；镜头外玩家想看到大保底金光落地。",
+    "core_conflict": "玩家等待并相信大保底奖励，阿哈却把金光截胡，将严肃抽卡仪式改写成个人整活秀。",
+    "reversal": "片头金光不是五星角色，而是阿哈面具；U07 的严肃黑白哲学也不是反省，而是终局发癫的前摇。",
+    "ending": "阿哈在彩纸与狂笑中宣布真理就是找乐子，威胁下次十连把金光换成防御力词条，并弹出小红书版假保底符结束。",
+    "world_rules": "伪抽卡空间与阿哈的欢愉业绩舞台；镜头外玩家是默认观众；阿哈可以打破第四面墙直接对镜头说话；不进入星铁主线时间线。",
+    "timeline": "单条顺叙；U07 的黑白严肃段落是主持秀内部节奏变化，不构成时间跳跃。",
+    "locations": [
+      "伪抽卡星轨空间",
+      "阿哈的欢愉业绩舞台"
+    ],
+    "event_order": [
+      "U01：伪抽卡星轨高速划过，车门开启并爆出金光剪影，金光吞满画面。",
+      "U02：金光如镜面碎裂，阿哈面具贴到镜头前，说出吞掉大保底的台词。",
+      "U03：阿哈以礼帽手杖主持人化身登场，点开身后的欢愉业绩投影。",
+      "U04：投影演示克里珀砌墙，砖块变成弹力海绵，锤击后反弹。",
+      "U05：投影演示星穹列车地板被打蜡，帕姆式扁平剪影一路滑走。",
+      "U06：投影演示小丑帽虚数蠕虫与巡猎、丰饶剪影打麻将，命途冲突变成牌桌闹剧。",
+      "U07：画面骤停转黑白，阿哈收笑压低声音，伪装成严肃哲学提问。",
+      "U08：静止半秒后彩纸爆炸，阿哈说出终局台词前半，假严肃彻底崩塌。",
+      "U09：阿哈贴脸说完终局台词后半，假保底符铺满画面，完成威胁与小红书 CTA。"
+    ],
+    "must_lines": [
+      {
+        "id": "L01",
+        "speaker_id": "DR-01",
+        "speaker": "阿哈",
+        "delivery": "on_screen",
+        "text": "恭喜你！你卡池里留给大保底的金光——刚刚被阿哈一口吞掉了！哈哈哈哈哈！！",
+        "status": "locked"
+      },
+      {
+        "id": "L02",
+        "speaker_id": "DR-01",
+        "speaker": "阿哈",
+        "delivery": "on_screen",
+        "text": "真理就是——如果不找点乐子，你现在就得滚回去加班或者刷遗器了！快给视频点赞！不然今晚十连抽，阿哈亲自下井把你的金光换成防御力词条！哈哈哈哈哈！",
+        "status": "locked"
+      }
+    ],
+    "forbidden_changes": [
+      "不改变 L01、L02 的逐字文本、说话人和归属",
+      "不改变结局：阿哈必须完成假哲学、爆彩纸、威胁换防御词条和假保底符四个可见动作",
+      "不新增有台词角色或将扁平梗图剪影升级为稳定角色",
+      "不复用官方原图、游戏截图、原片、Logo 或水印",
+      "不加入任何 BGM",
+      "不将伪抽卡 UI 伪装成官方真实抽卡结果或官方广告"
+    ]
+  },
+  "audio": {
+    "dialogue": "有；仅阿哈中文独白式主持台词",
+    "narration": "无独立旁白；主持串场均由阿哈本人声线完成",
+    "ambience": "星轨低频、舞台空间底噪、黑白段微弱心跳",
+    "foley": "抽卡锁音、镜面碎裂、弹力海绵回弹、地板打滑、麻将碰撞、彩纸礼炮、弹窗弹出",
+    "bgm": "无 BGM",
+    "mix_target": "阿哈人声始终居前；无音乐遮罩；静音停顿和心跳必须保留",
+    "subtitle_note": "硬字幕；L02 在 U08/U09 分两次显示并保持逐字拼接一致"
+  },
+  "characters": [
+    {
+      "id": "DR-01",
+      "display_name": "阿哈",
+      "tier": "core",
+      "relationship": "与镜头外抽卡玩家构成戏弄者与观众的关系；无同伴角色",
+      "episodes": [
+        "S01E01"
+      ],
+      "appears_in": "U01-U09",
+      "speaks": true,
+      "visual_lock": {
+        "status": "pending",
+        "description": "红白相间、狂笑不止的阿哈面具；眼珠可独立转动；主持人化身戴黑色高礼帽并使用手杖；整体为原创重绘的欢愉主持造型",
+        "must_keep": [
+          "红白相间狂笑面具",
+          "可独立转动的眼球",
+          "黑色高礼帽与手杖",
+          "狂笑与瞬间收敛的表情反差"
+        ],
+        "forbidden_changes": [
+          "摘下面具露出完整人类脸",
+          "改变红白面具主配色",
+          "变成其他角色或新增主持人伙伴",
+          "复刻官方立绘、游戏画面或原片构图"
+        ]
+      },
+      "performance_lock": "主持时油滑、亢奋、语速飞快；整活时动作夸张；U07 突然收笑、压低音量伪装深沉；U08-U09 再次破功并持续狂笑。核心动作包括贴脸、转动手杖、按遥控、摊手、指向投影、爆彩纸和逼近镜头。",
+      "voice_lock": {
+        "status": "pending",
+        "description": "魔性、油滑、带播报腔的欢愉主持声线；可瞬间压低为低沉磁性男声；狂笑与破音必须由同一角色声线完成",
+        "file": "",
+        "source": "",
+        "duration_sec": 0
+      },
+      "continuity": "全程仅一套红白面具与礼帽主持人造型；不战损、不换装；道具从手杖遥控到假保底符的控制权始终属于阿哈。",
+      "variants": [],
+      "references": {
+        "status": "pending",
+        "items": []
+      },
+      "rights_status": "pending",
+      "lock_status": "draft"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "SCENE_01",
+      "display_name": "伪抽卡星轨空间",
+      "layout": "9:16 满屏伪抽卡空间，星轨高速向纵深掠过，尽头出现列车门与金色爆光；界面结构原创重绘，不使用官方 Logo、角色立绘或真实卡池文字",
+      "lighting": "深蓝黑星轨底色，金色爆光从门缝向外扩散，U01 末尾达到过曝；U02 金光瞬间碎裂为镜片",
+      "reusable": true,
+      "style_lock": "精致游戏 UI 质感的二创演绎；高亮金属边缘、粒子、轨道残影；禁止官方商标、官方 UI 原图和水印",
+      "reference_status": "pending",
+      "lock_status": "draft"
+    },
+    {
+      "id": "SCENE_02",
+      "display_name": "欢愉业绩舞台",
+      "layout": "深色马戏团风格舞台，中央为可翻页的大型投影屏，顶部悬挂彩纸礼炮，前景留出阿哈近景贴脸空间；U07 可整体切换为黑白低饱和",
+      "lighting": "U03-U06 为高饱和紫红与金色舞台光；U07 骤停转黑白并降低照度；U08-U09 彩纸、金色拉炮与舞台灯同时爆亮",
+      "reusable": true,
+      "style_lock": "欢愉、马戏团、电视导购与劣质 PPT 混合质感；所有投影内容为扁平梗图，不是稳定角色资产",
+      "reference_status": "pending",
+      "lock_status": "draft"
+    }
+  ],
+  "props": [
+    {
+      "id": "PROP_01",
+      "display_name": "伪抽卡金光门",
+      "holder": "伪抽卡空间",
+      "state_changes": "星轨关闭 → 车门开启 → 金光剪影爆发 → 镜面碎裂",
+      "trigger": "TRIG_01 阿哈面具撞击金光镜面",
+      "uses_reference": true,
+      "reference_status": "pending",
+      "lock_status": "draft"
+    },
+    {
+      "id": "PROP_02",
+      "display_name": "欢愉业绩投影",
+      "holder": "阿哈的舞台背景",
+      "state_changes": "黑屏启动 → 本周业绩标题 → 三段扁平梗图 → 文件碎裂 / 黑白",
+      "trigger": "TRIG_02 阿哈用手杖按下虚拟翻页键",
+      "uses_reference": true,
+      "reference_status": "pending",
+      "lock_status": "draft"
+    },
+    {
+      "id": "PROP_03",
+      "display_name": "手杖遥控器",
+      "holder": "阿哈",
+      "state_changes": "指向投影 → 点击翻页 → 举向镜头 → 爆发彩纸",
+      "trigger": "TRIG_02 / TRIG_03",
+      "uses_reference": true,
+      "reference_status": "pending",
+      "lock_status": "draft"
+    },
+    {
+      "id": "PROP_04",
+      "display_name": "小红书版假保底符",
+      "holder": "阿哈",
+      "state_changes": "未出现 → 从彩纸中弹出 → 铺满画面，显示“点赞收藏保底不歪”",
+      "trigger": "TRIG_03 阿哈狂笑达到峰值",
+      "uses_reference": true,
+      "reference_status": "pending",
+      "lock_status": "draft"
+    }
+  ],
+  "crowd_groups": [],
+  "triggers": [
+    {
+      "id": "TRIG_01",
+      "name": "金光镜面碎裂",
+      "condition": "阿哈面具从金光内部撞向屏幕",
+      "effect": "伪抽卡金光裂成镜片，U02 直接切到阿哈贴脸"
+    },
+    {
+      "id": "TRIG_02",
+      "name": "欢愉业绩翻页",
+      "condition": "阿哈用手杖按下虚拟翻页键",
+      "effect": "投影依次播放克里珀海绵墙、列车打蜡、命途麻将三段梗图"
+    },
+    {
+      "id": "TRIG_03",
+      "name": "假哲学爆彩",
+      "condition": "阿哈在 U08 静止后突然破音狂笑",
+      "effect": "彩纸与假面爆满舞台，U09 弹出小红书版假保底符"
+    }
+  ],
+  "generation": {
+    "default_provider": "minimax-h3",
+    "unit_overrides": {},
+    "prompt_enhancer": "optional"
+  },
+  "production": {
+    "asset_mode": "existing",
+    "failure_policy": "fail_fast",
+    "project_root": "projects/阿哈：关于我今天如何给银河系添堵",
+    "media_root": "media/阿哈：关于我今天如何给银河系添堵",
+    "file_patterns": {
+      "character_reference": "<ID>_<中文名>_参考图.<ext>",
+      "character_four_view": "<ID>_<中文名>_四视图.<ext>",
+      "scene_reference": "<ID>_<中文名>.<ext>",
+      "prop_reference": "<ID>_<中文名>.<ext>",
+      "voice_reference": "<ID>_<中文名>_声线_<时长>s.<ext>"
+    },
+    "model_workflow_version": "MiniMax H3 legacy; generation_mode=unit; user-supplied assets",
+    "existing_project_id": "new"
+  },
+  "confirmation": {
+    "lock_status": "partial",
+    "rights_status": "pending",
+    "confirmed": [
+      "项目事实：片名、星铁二创、小红书、90 秒、9 个 10 秒单元、9:16、中文、无 BGM、硬字幕",
+      "故事目标、核心冲突、反转和源稿三段式结局",
+      "L01 与 L02 的逐字台词、说话人和归属",
+      "仅阿哈作为稳定出镜与说话角色；其他人物只做扁平梗图剪影",
+      "所有参考图、声线、场景图、道具图和视频资产由用户自行建立",
+      "U01-U09 的十秒节拍与 U01/U04/U07 的幕钩子锚点"
+    ],
+    "pending": [
+      "崩坏：星穹铁道二创版权与平台审核风险评估",
+      "用户建立 DR-01 参考图、四视图与角色声线",
+      "用户建立 SCENE_01、SCENE_02、PROP_01-PROP_04 参考资产",
+      "字幕字体选型及商用许可",
+      "最终署名格式"
+    ],
+    "forbidden": [
+      "不改变 L01、L02 和结局动作顺序",
+      "不新增有台词角色或将梗图剪影升级为稳定角色",
+      "不复用官方原图、原片、Logo、水印或真实支付界面",
+      "不加入 BGM",
+      "不把本仓库标记为资产已生成或成片已验收"
+    ],
+    "change_log": [
+      {
+        "date": "2026-11-11",
+        "change": "从 Basic Memory 星铁篇源稿建立独立 90 秒项目并完成创作蓝图与故事地图",
+        "impact": "项目停在镜头剧本之前；资产由用户自行建立，当前全部待补",
+        "actor": "Codex"
+      }
+    ]
+  },
+  "media_manifest": []
+}

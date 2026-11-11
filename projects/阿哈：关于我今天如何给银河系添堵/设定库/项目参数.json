@@ -1,0 +1,19 @@
+{
+  "schema": "drama-v2-project",
+  "version": 1,
+  "project_id": "star-rail-aha-galaxy-prank",
+  "episode_id": "S01E01",
+  "duration": 90,
+  "unit_seconds": 10,
+  "unit_count": 9,
+  "generation_mode": "unit",
+  "aspect_ratio": "9:16",
+  "game": "崩坏：星穹铁道",
+  "asset_mode": "existing",
+  "asset_owner": "user",
+  "failure_policy": "fail_fast",
+  "paths": {
+    "asset_catalog": "设定库/资产清单.md"
+  },
+  "shot_script_checks": []
+}
