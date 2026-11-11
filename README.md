@@ -9,6 +9,33 @@
 
 媒体文件不进入 Git。图片、音频、视频放在独立媒体目录，项目 JSON 只记录相对路径和媒体清单。
 
+## Basic Memory 主库与项目链接
+
+项目文本的唯一维护位置是 Basic Memory：
+
+```text
+C:\Basic Memory short-video\game-short-video\<游戏分类>\《项目名》\
+```
+
+本仓库的 `projects/<项目>` 应作为该目录的 Windows junction，而不是另建一份实体副本。Git 会跟随 junction 读取并提交目标中的文本，GitHub Actions 看到的是普通项目路径。
+
+不把整个 `projects` 根目录直接链接到 `game-short-video`：该库还包含其他作品、媒体和剪辑工程，按项目建立 junction 才能限制 Git 和 Actions 的处理范围。
+
+新电脑 clone 后，如果 `projects/<项目>` 是普通目录，先确认没有未提交改动，再替换为 junction：
+
+```powershell
+$project = "项目名"
+$repo = "C:\Users\莫小哈\Documents\Codex\short-drama-workbench"
+$target = "C:\Basic Memory short-video\game-short-video\<游戏分类>\《$project》"
+$link = Join-Path $repo "projects\$project"
+
+# 仅在 $link 的文本已与 $target 完全一致后执行
+Remove-Item -Recurse -Force -LiteralPath $link
+New-Item -ItemType Junction -Path $link -Target $target
+```
+
+不要在链接目标之外另改仓库副本，否则会出现 Basic Memory 与 GitHub 两套内容。
+
 ## 日常使用
 
 仓库地址：
@@ -19,7 +46,7 @@ https://github.com/moxiaoha19251010-stack/short-drama-workbench
 
 1. 在任意电脑打开上面的 GitHub 仓库。
 2. 打开 `projects/<项目>/项目档.md`，这是给人看的中文项目档。
-3. 需要修改时，直接在 `projects/<项目>` 编辑 `project.json` 和阶段文本，然后按“项目文本修改后重新上传”同步。
+3. 需要修改时，在 Basic Memory 主库的项目目录编辑 `project.json` 和阶段文本；仓库中的 junction 会直接反映修改，然后按“项目文本修改后重新上传”同步。
 4. 提交后 GitHub Actions 会自动校验并重新生成 `项目档.md`，公司电脑不需要安装 Node。
 5. 需要继续做短剧时，把 `项目档.md` 或 `project.json` 复制给外部 AI 或 Codex。
 
@@ -60,7 +87,7 @@ git push
 
 项目已经完成、只是改了剧本、设定、`project.json` 或成片时，按下面的顺序回传。完整命令解释见 Basic Memory《短剧全链路总览》第 4 节。
 
-1. 在 `projects/<项目>` 保存修改；若项目源稿另存在 Basic Memory，只同步文本，不复制媒体。
+1. 在 `C:\Basic Memory short-video\game-short-video\<游戏分类>\《项目名》` 保存修改；仓库中的 junction 会自动反映文本变化。
 2. 进入仓库并先拉取：
 
 ```powershell
@@ -68,7 +95,7 @@ cd C:\Users\莫小哈\Documents\Codex\short-drama-workbench
 git pull --rebase
 ```
 
-3. 文本项目包只包含 `project.json`、`创作蓝图.md`、`故事地图.md`、`章01_镜头剧本.md`、`设定库/`、`H3/`、`交接/`、`记录/验收记录.md`；路径统一使用 `projects/<项目>`。
+3. 文本项目包只包含 `project.json`、`创作蓝图.md`、`故事地图.md`、`章01_镜头剧本.md`、`设定库/`、`H3/`、`交接/`、`记录/验收记录.md`；Git 通过 `projects/<项目>` junction 读取这些文件。
 4. 校验并重新生成项目档：
 
 ```powershell
@@ -120,6 +147,12 @@ New-Item -ItemType Junction `
 - `projects/若娜瓦的草莓蛋糕/项目档.md`
 - `projects/阿哈：关于我今天如何给银河系添堵/project.json`
 - `projects/阿哈：关于我今天如何给银河系添堵/项目档.md`
+
+`阿哈：关于我今天如何给银河系添堵` 的主库路径：
+
+```text
+C:\Basic Memory short-video\game-short-video\星穹铁道\《阿哈：关于我今天如何给银河系添堵》
+```
 
 ## 在任意电脑查看
 
